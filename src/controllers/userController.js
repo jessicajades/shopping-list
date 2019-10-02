@@ -19,7 +19,7 @@ module.exports = {
                 res.redirect("/users/signup");
             } else {
                 passport.authenticate("local")(req, res, () => {
-                    req.flash("notice", "You've successfully signed in!");
+                    req.flash("notice", "You've successfully signed in");
                     res.redirect("/lists/index");
                 });
             }
