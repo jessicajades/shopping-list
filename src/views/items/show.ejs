@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+
+        <main class="container">
+            <h1><%= item.description %></h1>
+
+            <p>Quantity: <%= item.quantity %></p>
+
+            <a
+                href="/lists/<%= item.listId %>/items/<%= item.id %>/edit"
+                class="btn btn-warning"
+                >Edit</a
+            >
+
+            <form
+                style="display:initial"
+                action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy"
+                method="post"
+            >
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <a href="/lists/<%= item.listId %>" class="btn btn-success"
+                >Return to list</a
+            >
+        </main>
+
+        <% include ../static/partials/baseScripts.ejs %>
+    </body>
+</html>

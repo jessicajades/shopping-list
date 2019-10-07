@@ -18,6 +18,25 @@
             >
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
+            <br /><br />
+
+            <a href="/lists/<%= list.id %>/items/new" class="btn btn-success"
+                >Add Item</a
+            >
+
+            <hr />
+
+            <h1>Items</h1>
+
+            <ul class="list-group">
+                <% list.items.forEach((item) => { %>
+                <li class="list-group-item">
+                    <a href="/lists/<%= list.id %>/items/<%= item.id %>">
+                        <%= item.description %>
+                    </a>
+                </li>
+                <% }) %>
+            </ul>
         </main>
 
         <% include ../static/partials/baseScripts.ejs %>

@@ -1,15 +1,19 @@
 "use strict";
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable("Lists", {
+        return queryInterface.createTable("Items", {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            name: {
+            description: {
                 type: Sequelize.STRING,
+                allowNull: false
+            },
+            quantity: {
+                type: Sequelize.INTEGER,
                 allowNull: false
             },
             createdAt: {
@@ -20,18 +24,19 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             },
-            userId: {
+            listId: {
                 type: Sequelize.INTEGER,
                 onDelete: "CASCADE",
+                allowNull: false,
                 references: {
-                    model: "Users",
+                    model: "Lists",
                     key: "id",
-                    as: "userId"
+                    as: "listId"
                 }
             }
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable("Lists");
+        return queryInterface.dropTable("Items");
     }
 };
