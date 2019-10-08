@@ -9,14 +9,16 @@
         <main class="container">
             <h1><%= list.name %></h1>
             <a href="/lists/<%= list.id %>/edit" class="btn btn-warning"
-                >Edit</a
+                >Edit List</a
             >
             <form
                 style="display:initial"
                 action="/lists/<%= list.id %>/destroy"
                 method="post"
             >
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger">
+                    Delete List
+                </button>
             </form>
             <br /><br />
 
@@ -27,10 +29,43 @@
             <hr />
 
             <h1>Items</h1>
-
+            <p>Select the checkbox to mark item as purchased</p>
             <ul class="list-group">
                 <% list.items.forEach((item) => { %>
                 <li class="list-group-item">
+                    <% if(item.purchased == false){ %>
+                    <form
+                        action="/lists/<%= item.listId %>/items/<%= item.id %>/purchased"
+                        method="post"
+                        style="display: inline"
+                        name="purchased"
+                        value="true"
+                    >
+                        <input
+                            type="checkbox"
+                            onChange="this.form.submit()"
+                            value="true"
+                            name="purchased"
+                        />
+                    </form>
+                    <% } else{ %>
+                    <form
+                        action="/lists/<%= item.listId %>/items/<%= item.id %>/purchased"
+                        method="post"
+                        style="display: inline"
+                        name="purchased"
+                        value="true"
+                    >
+                        <input
+                            type="checkbox"
+                            onChange="this.form.submit()"
+                            value="true"
+                            name="purchased"
+                            checked
+                        />
+                    </form>
+                    <% } %>
+
                     <a href="/lists/<%= list.id %>/items/<%= item.id %>">
                         <%= item.description %>
                     </a>

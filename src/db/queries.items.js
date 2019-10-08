@@ -50,5 +50,27 @@ module.exports = {
                     callback(err);
                 });
         });
+    },
+
+    updateStatus(id, callback) {
+        return Item.findById(id)
+            .then(item => {
+                if (!item) {
+                    return callback("item not found");
+                } else if (item.purchased == false) {
+                    item.update({
+                        purchased: true
+                    });
+                    callback(null, item);
+                } else {
+                    item.update({
+                        purchased: false
+                    });
+                    callback(null, item);
+                }
+            })
+            .catch(err => {
+                callback(err);
+            });
     }
 };

@@ -67,5 +67,11 @@ module.exports = {
                 );
             }
         });
+    },
+
+    purchased(req, res, next) {
+        itemQueries.updateStatus(req.params.id, (err, item) => {
+            console.log(item);
+        });
     }
 };

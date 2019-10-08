@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
+            purchased: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
+            },
             listId: {
                 type: DataTypes.INTEGER,
                 allowNull: false
@@ -24,5 +29,10 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "CASCADE"
         });
     };
+
+    Item.prototype.isPurchased = function() {
+        return this.purchased;
+    };
+
     return Item;
 };
