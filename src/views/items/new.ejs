@@ -2,6 +2,16 @@
 <html>
     <head>
         <% include ../static/partials/head.ejs %>
+
+        <script>
+            var socket = io();
+            $("form").submit(function(e) {
+                e.preventDefault();
+                socket.emit("new item", $("#item").val());
+                $("#item").val("");
+                return false;
+            });
+        </script>
     </head>
     <body>
         <% include ../static/partials/navbar.ejs %>
@@ -17,6 +27,7 @@
                         name="description"
                         aria-describedby="descriptionHelp"
                         placeholder="Enter Item Description"
+                        id="item"
                     />
                 </div>
                 <div class="form-group">

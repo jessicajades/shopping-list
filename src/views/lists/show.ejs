@@ -21,18 +21,63 @@
                 </button>
             </form>
             <br /><br />
-
-            <a href="/lists/<%= list.id %>/items/new" class="btn btn-success"
-                >Add Item</a
-            >
-
+            <small>Scroll down for list</small>
             <hr />
 
-            <h1>Items</h1>
-            <p>Select the checkbox to mark item as purchased</p>
-            <ul class="list-group">
+            <h2>Add New Item</h2>
+            <form
+                id="itemForm"
+                action="/lists/<%= list.id %>/items/create"
+                method="post"
+            >
+                <div class="form-group">
+                    <label>Enter Item Description</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="description"
+                        aria-describedby="descriptionHelp"
+                        placeholder="Enter Item Description"
+                        id="item"
+                    />
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="quantity"
+                        aria-describedby="quantityHelp"
+                        placeholder="Enter Quantity"
+                        id="quantity"
+                    />
+                </div>
+                <input type="submit" class="btn btn-primary" value="Add Item" />
+            </form>
+
+            <br />
+            <hr />
+            <br />
+            <h2>Items</h2>
+            <small
+                >Please use 'Mark As Purchased' while still shopping, and
+                'Delete' to clear from the list permanently.</small
+            >
+            <div id="updatePlaceholder"></div>
+            <ul class="list-group" id="items">
                 <% list.items.forEach((item) => { %>
                 <li class="list-group-item">
+                    <!-- <a href="/lists/<%= list.id %>/items/<%= item.id %>">
+                        <%= item.description %>
+                    </a> -->
+                    <% if(item.purchased == true){ %>
+                    <p><strong>ITEM ALREADY PURCHASED</strong></p>
+                    <% } %>
+                    <p>
+                        <strong>Item: </strong><%= item.description %>,
+                        <strong>Quantity: </strong><%= item.quantity %>
+                    </p>
+
                     <% if(item.purchased == false){ %>
                     <form
                         action="/lists/<%= item.listId %>/items/<%= item.id %>/purchased"
@@ -40,13 +85,16 @@
                         style="display: inline"
                         name="purchased"
                         value="true"
+                        id="checkForm"
                     >
-                        <input
-                            type="checkbox"
-                            onChange="this.form.submit()"
+                        <button
+                            type="submit"
                             value="true"
                             name="purchased"
-                        />
+                            class="btn btn-success"
+                        >
+                            Mark As Purchased
+                        </button>
                     </form>
                     <% } else{ %>
                     <form
@@ -55,25 +103,79 @@
                         style="display: inline"
                         name="purchased"
                         value="true"
+                        id="checkForm"
                     >
-                        <input
-                            type="checkbox"
-                            onChange="this.form.submit()"
-                            value="true"
+                        <button
+                            type="submit"
+                            value="false"
                             name="purchased"
-                            checked
-                        />
+                            class="btn btn-warning"
+                        >
+                            Unmark As Purchased
+                        </button>
                     </form>
                     <% } %>
 
-                    <a href="/lists/<%= list.id %>/items/<%= item.id %>">
-                        <%= item.description %>
-                    </a>
+                    <form
+                        style="display:initial"
+                        action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy"
+                        method="post"
+                        id="deleteForm"
+                    >
+                        <button type="submit" class="btn btn-danger">
+                            Delete
+                        </button>
+                    </form>
                 </li>
                 <% }) %>
             </ul>
+            <br /><br />
         </main>
 
         <% include ../static/partials/baseScripts.ejs %>
+
+        <script>
+            $(function() {
+                var socket = io();
+                var $itemForm = $("#itemForm");
+                var $item = $("#item");
+                var $quantity = $("#quantity");
+                var $items = $("#items");
+                var $deleteForm = $("#deleteForm");
+                var $updatePlaceholder = $("#updatePlaceholder");
+                var $checkForm = $("#checkForm");
+
+                $itemForm.submit(function(e) {
+                    socket.emit("add item", $item.val());
+                });
+
+                //data.item
+
+                socket.on("new item", function(data) {
+                    let appendedItem =
+                        '<li class="list-group-item">' +
+                        data.item +
+                        " - please refresh for details</li>";
+                    $items.append(appendedItem);
+                });
+
+                $deleteForm.submit(function() {
+                    socket.emit("delete item");
+                });
+
+                socket.on("deleted item", function(data) {
+                    $updatePlaceholder.append(data.msg);
+                });
+
+                // mark as purchased
+                $checkForm.submit(function() {
+                    socket.emit("purchased item");
+                });
+
+                socket.on("marked item", function(data) {
+                    $updatePlaceholder.append(data.msg);
+                });
+            });
+        </script>
     </body>
 </html>

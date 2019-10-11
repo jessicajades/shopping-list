@@ -71,7 +71,11 @@ module.exports = {
 
     purchased(req, res, next) {
         itemQueries.updateStatus(req.params.id, (err, item) => {
-            console.log(item);
+            if (err || item == null) {
+                res.redirect(404, `/lists/${req.params.listId}`);
+            } else {
+                res.redirect(`/lists/${req.params.listId}`);
+            }
         });
     }
 };
