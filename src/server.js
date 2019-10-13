@@ -52,6 +52,8 @@ io.on("connection", function(socket) {
 
     // marked as purchased
     socket.on("purchased item", function() {
-        io.sockets.emit("marked item", { msg: "list updated, pls refresh" });
+        io.sockets.emit("marked item", {
+            msg: "Changes have been made. Please refresh."
+        });
     });
 });

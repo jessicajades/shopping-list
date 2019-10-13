@@ -1,7 +1,110 @@
 body {
-    padding-top: 54px;
+    padding-top: 75px;
 }
 
 .purchased {
     text-transform: uppercase;
+}
+
+.btn-primary {
+    background-color: hotpink;
+    border: hotpink;
+}
+
+.btn-primary:hover {
+    background-color: deeppink;
+    border: deeppink;
+}
+
+.btn-primary:focus {
+    outline: none !important;
+}
+
+.btn-success {
+    background-color: mediumvioletred;
+    border: mediumvioletred;
+}
+
+.btn-success:hover {
+    background-color: deeppink;
+    border: deeppink;
+}
+
+.btn-success:hover,
+.btn-success:active,
+.btn-success:focus,
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-warning:hover,
+.btn-warning:active,
+.btn-warning:focus {
+    background-color: deeppink !important;
+    border: deeppink !important;
+    outline: none !important;
+}
+
+.btn-warning:hover {
+    color: white;
+}
+
+p,
+label {
+    color: darkslateblue;
+    font-family: "Roboto", sans-serif;
+}
+
+a {
+    color: darkslateblue;
+    font-family: "Roboto", sans-serif;
+}
+
+a:hover {
+    color: darkslateblue;
+}
+
+small {
+    font-family: "Roboto", sans-serif;
+    color: darkslateblue;
+}
+
+h1,
+.section-name {
+    color: hotpink;
+    font-family: "Patrick Hand", cursive;
+}
+
+.main-txt {
+    color: hotpink;
+    font-family: "Fredericka the Great", cursive;
+}
+
+h2 {
+    color: slateblue;
+    font-family: "Patrick Hand", cursive;
+}
+
+.btn-danger {
+    background-color: mediumorchid;
+    border: mediumorchid;
+}
+
+.btn-warning {
+    background-color: orchid;
+    border: orchid;
+    color: white;
+}
+
+#purchased-text {
+    color: hotpink;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#updatePlaceholder {
+    color: deeppink;
+    font-size: 18px;
 }

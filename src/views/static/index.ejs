@@ -7,26 +7,31 @@
         <% include ./partials/navbar.ejs %>
 
         <main class="container">
-            <header class="jumbotron my-4">
-                <h1 class="display-3">Welcome to the shopping list</h1>
-                <p class="lead">
-                    An application for users to share shopping lists.
+            <header class="jumbotron my-4 text-center">
+                <h1 class="display-3 text-center main-txt">
+                    Welcome to the Shopping List
+                </h1>
+                <p class="lead text-center">
+                    An application for users to share shopping lists in
+                    real-time.
                 </p>
-                <a href="/users/signup" class="btn btn-primary btn-lg"
+                <a
+                    href="/users/signup"
+                    class="btn btn-primary btn-lg text-center"
                     >Sign up</a
                 >
             </header>
 
             <section class="row text-center">
                 <section class="col-lg-4">
-                    <h4 class="card-title">Create</h4>
+                    <h4 class="card-title section-name">Create</h4>
                     <p class="card-text">
                         Create different lists to organize however you'd like.
                     </p>
                 </section>
 
                 <section class="col-lg-4">
-                    <h4 class="card-title">Update</h4>
+                    <h4 class="card-title section-name">Update</h4>
                     <p class="card-text">
                         You can add, delete, and update individual items on each
                         list.
@@ -34,7 +39,7 @@
                 </section>
 
                 <section class="col-lg-4">
-                    <h4 class="card-title">Collaborate</h4>
+                    <h4 class="card-title section-name">Collaborate</h4>
                     <p class="card-text">
                         Invite your family and friends to be collaborators on
                         your lists, and shop together in real-time!

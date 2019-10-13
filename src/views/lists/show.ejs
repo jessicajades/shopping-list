@@ -71,7 +71,9 @@
                         <%= item.description %>
                     </a> -->
                     <% if(item.purchased == true){ %>
-                    <p><strong>ITEM ALREADY PURCHASED</strong></p>
+                    <p id="purchased-text">
+                        <strong>ITEM IS IN SOMEONE'S CART</strong>
+                    </p>
                     <% } %>
                     <p>
                         <strong>Item: </strong><%= item.description %>,
@@ -115,6 +117,12 @@
                         </button>
                     </form>
                     <% } %>
+
+                    <a
+                        href="/lists/<%= item.listId %>/items/<%= item.id %>/edit"
+                        class="btn btn-primary"
+                        >Edit</a
+                    >
 
                     <form
                         style="display:initial"
