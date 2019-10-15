@@ -2,7 +2,7 @@
 
 ## About
 
-Shopping List is an application that I built for a mock-interview coding challenge as part of Bloc's cirriculum. It allows users to create, edit, and delete different shopping lists with items to buy for each individual store. The cool part about this app is that it sends users updates in real-time using Socket.IO. This way if you are shopping with a family member or friend, you both aren't picking up the same items.
+Shopping List is an application that I built for a mock-interview coding challenge as part of Bloc's curriculum. It allows users to create, edit, and delete different shopping lists with items to buy for each individual store. The cool part about this app is that it sends users updates in real-time using Socket.IO. This way if you are shopping with a family member or friend, you both aren't picking up the same items.
 
 You can view the live application [here](https://jessicajades-shopping-list.herokuapp.com/)
 
